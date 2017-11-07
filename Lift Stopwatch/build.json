@@ -1,0 +1,11 @@
+{
+     "android": {
+         "release": {
+             "keystore": "C:\\VS_Projects\\tomie.keystore",
+             "storePassword": "Maliwan7",
+             "alias": "TooMeeNoo",
+             "password" : "Maliwan7",
+             "keystoreType": ""
+         }
+     }
+ }

@@ -1,0 +1,346 @@
+/* VM code*/
+.view{
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0%;
+    left:0%;
+    display:none;
+    opacity:0;
+}
+.preview{
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0%;
+    left:0%;
+    display:block;
+    opacity:1;
+}
+/* END VM */
+
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+body {
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -webkit-user-select: none;
+    background-color:#32383d;
+    font-family: 'RobotoRegular', 'Droid Sans', 'Segoe UI', Segoe, 'San Francisco', 'Helvetica Neue', Helvetica, Arial, Geneva, sans-serif;
+    font-size:12px;
+    background-image:url("../images/background_optimized_dark.jpg");
+    background-size:cover;
+}
+*{
+	padding:0;
+	margin:0;
+    font-family:'Roboto', sans-serif;
+}
+body, html{
+	width:100vw;
+	height:100vh;
+	background-color:hsla(0,0%,13%,1.00);
+	overflow:hidden;
+}
+#homescreen section{
+  display: flex;
+  height:100%;
+  width:100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+#homescreen img{
+    max-width: 60vw;
+    display: block;
+    margin: auto;
+    margin-bottom:50px;
+    max-height:15vh;
+}
+#homescreen button{
+    max-width:60vw;
+    width:300px;
+    display:block;
+    margin:auto;
+    margin-bottom:15px;
+    height:2.5em;
+    border-radius:10px;
+    border:none;
+    font-weight:lighter;
+    font-size:150%;
+}
+.green{
+    background-color:hsla(82,100%,69%,1.00);
+}
+.red{
+    background-color:#ff9999;
+}
+#wr{
+	margin:auto;
+}
+#text{
+    position:absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+#circle{
+	border-radius:100%;
+	width:100%;
+	height:100%;
+	background-image:url(../images/time.svg);
+	background-size:cover;
+	box-sizing:border-box;
+	border: solid 3px #0f0f0f;
+	background-color:#0f0f0f;
+}
+#secimg{
+	background-image:url(../images/sec.svg);
+	height:30%;
+	background-size:contain;
+	background-repeat:no-repeat;
+}
+#sec{
+	z-index:8;
+}
+#min{
+	z-index:5;
+	top:-100%;
+}
+#minimg{
+	background-image:url(../images/min.svg);
+	height:30%;
+	background-size:contain;
+	background-repeat:no-repeat;
+}
+#totime{
+	z-index:4;
+	top:-200%;
+}
+#totimeimg{
+	background-image:url(../images/to.svg);
+	height:30%;
+	background-size:contain;
+	background-repeat:no-repeat;
+}
+.arm{
+	height:100%;
+	width:5vh;
+	border-radius:3px;
+	position:relative;
+	left:calc(50% - 5vh / 2);
+	transition-property:all;
+	transition-timing-function:linear;
+}
+#time{
+	position:absolute;
+	top:5px;
+	left:10px;
+	font-family:'Consolas', monotype;
+	color:#FFFFFF;
+	font-size:22px;
+}
+#total{
+	position:absolute;
+	top:30px;
+	left:10px;
+	font-family:'Consolas', monotype;
+	color:#FFFFFF;
+	font-size:16px;
+}
+@keyframes ball{
+    0%   {top:-75%;}
+    50%  {top:-25%;}
+    100% {top:-75%;}
+}
+#bh{
+	margin:auto;
+	position:relative;
+	top:-50%;
+	width:auto;
+	height:0px;
+	overflow:visible;
+	z-index:10;
+	background-color:hsla(82,100%,69%,1.00);
+	animation-name:ball;
+/*	animation-duration:2s;*/
+	animation-direction:normal;
+	animation-play-state:running;
+	animation-timing-function:ease-in-out;
+	animation-iteration-count:infinite;
+}
+#bh p{
+    text-align:center;
+    font-size:80px;
+    color:#e0e0e0;
+    position:relative;
+    top:-50px;
+}
+#ball{
+	margin:auto;
+	position:absolute;
+	width:100%;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:contain;
+	background-image:url(../images/cinka.svg)
+}
+#settings{
+    z-index:500;
+    font-size:20px;
+	position:absolute;
+	background-color:rgba(17, 16, 16, 0.67);
+	top:0%;
+	right:0;
+	width:100%;
+	height:100%;
+	box-sizing:border-box;
+	padding:15px;
+}
+#dvw div:hover{
+	background-color:#FFFFFF !important;
+}
+div.part *{
+    height:25px;
+    display:block;
+}
+div.part label {
+    width:100%;
+    color:#e0e0e0;
+    margin-bottom:10px;
+}
+div.part .pmbtn{
+    width:25px;
+    height:25px;
+    box-sizing:border-box;
+    float:left;
+    border:none;
+    background-color:#e0e0e0;
+    padding:5px;
+}
+div.part input {
+    float:left;
+    box-sizing:border-box;
+    border:none;
+    background-color:#e0e0e0;
+    padding:2px;
+    text-align:center;
+    width:calc(100% - 50px);
+    border-left: 2px solid #0e0e0e;
+    border-right: 2px solid #0e0e0e;
+}
+div.part div{
+    float:none;
+    clear:both;
+    height:25px;
+    margin-bottom:10px;
+}
+button:active, div.part .pmbtn:active{
+    background-color:#ffffff;
+}
+button.half{
+    background-color:#e0e0e0;
+    margin-bottom:10px;
+    width:calc(50% -  5px);
+    float:left;
+    border:none;
+    height:25px;
+}
+button.half:nth-child(2n) {
+    margin-right:10px;
+}
+button.switch:nth-child(2n) {
+    margin-left:10px !important;
+    margin-right:0px !important;
+}
+div.part{
+    display:none;
+}
+#exit{
+    background-color:#ff9999;
+}
+button.color {
+    margin-bottom:10px;
+    width:25px;
+    float:left;
+    border:none;
+    margin-right:10px;
+    height:25px;
+}
+button.color:active, button.color.set{
+    border:solid 2px #ffffff;
+}
+label.sub{
+    font-size:16px;
+    padding-left:5px;
+}
+label.copyright {
+    text-align:center;
+    font-size:12px;
+    color:#e0e0e0 !important;
+}
+
+
+@media screen and (orientation : landscape) {
+    #settings{
+        box-sizing:border-box;
+        padding-top:calc((100vh - 315px)/2);
+    }
+    #settings div.part{
+        box-sizing: border-box;
+        width:50%;
+        height:auto;
+        float:left;
+    }
+    #settings div.firstpart{
+        border-right:15px solid transparent/*#0e0e0e*/;
+        display:block;
+    }
+    #wr{
+        width:90vh;
+	    height:90vh;
+        padding-top:5vh;
+    }
+    #ball{
+        top:-10vh;
+        height:20vh;
+    }
+}
+@media screen and (orientation : portrait) {
+    #settings {
+        box-sizing: border-box;
+        /*overflow-y: scroll;*/
+        width: 100%;
+        height: 100%;
+    }
+    #settings div.part {
+        box-sizing: border-box;
+        width: 100%;
+        height: auto;
+        float: left;
+    }
+    #settings div.firstpart {
+        margin-bottom: 15px;
+        display:block;
+    }
+    #wr{
+        width:90vw;
+	    height:90vw;
+        padding-top:3vh;
+    }
+    #ball{
+        height:20vw;
+        top: -10vw;
+    }
+    #text{
+        width:100%;
+        position:relative;
+    }
+    #time, #total{
+        display:block;
+        text-align:center;
+        position:relative;
+    }
+}

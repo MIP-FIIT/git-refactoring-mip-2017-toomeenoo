@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>ACERRR</Machine>
+    <WindowsUser>TooMeeNoo</WindowsUser>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows 8.1</TargetOsDescription>
+    <SolutionConfiguration>debug|anycpu</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>sk.toomeenoo.liftsw</PackageIdentityName>
+    <PackageIdentityPublisher>CN=Apache Cordova Team</PackageIdentityPublisher>
+    <IntermediateOutputPath>C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\build\windows\bld\</IntermediateOutputPath>
+    <RemoteDeploymentType></RemoteDeploymentType>
+    <PackageRegistrationPath></PackageRegistrationPath>
+    <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\build\windows\debug\anycpu\win8.1\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\images\SplashScreen.scale-100.png">
+      <PackagePath>images\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\images\Square150x150Logo.scale-100.png">
+      <PackagePath>images\Square150x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\images\Square30x30Logo.scale-100.png">
+      <PackagePath>images\Square30x30Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\images\Square310x310Logo.scale-100.png">
+      <PackagePath>images\Square310x310Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\images\Square44x44Logo.scale-100.png">
+      <PackagePath>images\Square44x44Logo.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\images\Square70x70Logo.scale-100.png">
+      <PackagePath>images\Square70x70Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\images\Square71x71Logo.scale-100.png">
+      <PackagePath>images\Square71x71Logo.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\images\StoreLogo.scale-100.png">
+      <PackagePath>images\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\images\Wide310x150Logo.scale-100.png">
+      <PackagePath>images\Wide310x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\cordova-js-src\confighelper.js">
+      <PackagePath>www\cordova-js-src\confighelper.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\cordova-js-src\exec.js">
+      <PackagePath>www\cordova-js-src\exec.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\cordova-js-src\platform.js">
+      <PackagePath>www\cordova-js-src\platform.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\cordova-js-src\splashscreen.js">
+      <PackagePath>www\cordova-js-src\splashscreen.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\cordova.js">
+      <PackagePath>www\cordova.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\cordova_plugins.js">
+      <PackagePath>www\cordova_plugins.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\plugins\cordova-plugin-admobpro\www\AdMob.js">
+      <PackagePath>www\plugins\cordova-plugin-admobpro\www\AdMob.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\plugins\cordova-plugin-fullscreen\www\AndroidFullScreen.js">
+      <PackagePath>www\plugins\cordova-plugin-fullscreen\www\AndroidFullScreen.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\plugins\cordova-plugin-insomnia\src\windows\InsomniaProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-insomnia\src\windows\InsomniaProxy.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\plugins\cordova-plugin-insomnia\www\Insomnia.js">
+      <PackagePath>www\plugins\cordova-plugin-insomnia\www\Insomnia.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\scripts\admob_simple.js">
+      <PackagePath>www\scripts\admob_simple.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\scripts\async.delay.js">
+      <PackagePath>www\scripts\async.delay.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\scripts\index.js">
+      <PackagePath>www\scripts\index.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\scripts\lang.bkp.js">
+      <PackagePath>www\scripts\lang.bkp.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\scripts\lang.js">
+      <PackagePath>www\scripts\lang.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\scripts\platformOverrides.js">
+      <PackagePath>www\scripts\platformOverrides.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\scripts\Ssw.js">
+      <PackagePath>www\scripts\Ssw.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\scripts\viewManager.js">
+      <PackagePath>www\scripts\viewManager.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\scripts\winstore-jscompat.js">
+      <PackagePath>www\scripts\winstore-jscompat.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\WinJS\js\base.js">
+      <PackagePath>www\WinJS\js\base.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\css\about.css">
+      <PackagePath>www\css\about.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\css\index.css">
+      <PackagePath>www\css\index.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\css\splashscreen.css">
+      <PackagePath>www\css\splashscreen.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\docs\about_en.html">
+      <PackagePath>www\docs\about_en.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\index.html">
+      <PackagePath>www\index.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\images\background_optimized_dark.jpg">
+      <PackagePath>www\images\background_optimized_dark.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\images\back_img.svg">
+      <PackagePath>www\images\back_img.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\images\cinka.svg">
+      <PackagePath>www\images\cinka.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\images\min.svg">
+      <PackagePath>www\images\min.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\images\sec.svg">
+      <PackagePath>www\images\sec.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\images\time.svg">
+      <PackagePath>www\images\time.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\www\images\to.svg">
+      <PackagePath>www\images\to.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\config.xml">
+      <PackagePath>config.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\VS_Projects\Lift Stopwatch\Lift Stopwatch\platforms\windows\build\windows\debug\anycpu\win8.1\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\Microsoft.WinJS.2.0\1.0\">
+      <Name>Microsoft.WinJS.2.0</Name>
+      <Version>1.0.9600.17018</Version>
+      <Architecture>Neutral</Architecture>
+      <FrameworkIdentity>Name=Microsoft.WinJS.2.0, MinVersion=1.0.9600.17018</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\Microsoft.WinJS.2.0\1.0\Microsoft.WinJS.2.0.appx</AppxLocation>
+      <MoreInfo>http://go.microsoft.com/fwlink/%3fLinkId=260891</MoreInfo>
+    </ResolvedSDKReference>
+  </ItemGroup>
+</Project>
