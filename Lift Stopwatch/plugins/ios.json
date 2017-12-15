@@ -1,0 +1,31 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-admobpro": {
+            "PACKAGE_NAME": "sk.toomeenoo.liftsw"
+        },
+        "cordova-plugin-fullscreen": {
+            "PACKAGE_NAME": "sk.toomeenoo.liftsw"
+        },
+        "cordova-plugin-insomnia": {
+            "PACKAGE_NAME": "sk.toomeenoo.liftsw"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "sk.toomeenoo.liftsw"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "sk.toomeenoo.liftsw"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-extension": {
+            "PACKAGE_NAME": "sk.toomeenoo.liftsw"
+        }
+    }
+}

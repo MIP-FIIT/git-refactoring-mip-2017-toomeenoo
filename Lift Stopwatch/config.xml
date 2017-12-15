@@ -119,4 +119,5 @@
   <plugin name="cordova-plugin-insomnia" version="4.3.0" src="https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin" />
   <plugin name="cordova-plugin-fullscreen" version="1.1.0" />
   <preference name="android-maxSdkVersion" value="25" />
+  <plugin name="cordova-plugin-statusbar" version="2.3.0" />
 </widget>
