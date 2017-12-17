@@ -3,6 +3,9 @@ var Stopwatch = {
 	config: {
 		upPosition: 25,
 		dnPosition: 75,
+		rangeUp: {from:1, to:15, precision: 0.5},
+		rangeDn: {from:1, to:15, precision: 0.5},
+		rangeTimes: {from:1, to:500, precision: 1},
 		defaultData: {
 			tempoUp: 1,//seconds
 			tempoDn: 1,//seconds
@@ -39,13 +42,13 @@ var Stopwatch = {
 	    } else {
 	        Util.id("countdown").style.display = "none";
 			Util.id("bh").style.top = "-25%";
-	        setTimeout(Stopwatch.start, 100);
+	        setTimeout(Stopwatch.start, 10);
 	    }
 	},
 	start: function () {
 	    //VM callback keep screen on
 	    ViewManager.sleep(false);
-		
+				
 	    Util.id("ball").style.display = "block";
 
 		var time = Stopwatch.data.duration * 1000;
@@ -61,7 +64,7 @@ var Stopwatch = {
 		var now = new Date();
 		Stopwatch.data.start = now.getTime();
 		Stopwatch.data.end = now.getTime() + time
-		Stopwatch.jsLoop(true);
+		Stopwatch.jsLoop(false);
 		
 		Stopwatch.showTime();
 	},
@@ -200,74 +203,92 @@ Util = {
         store: function (name, val) {
             localStorage.setItem(name, val);
         },
-        get: function (name, def) {
+        get: function (name, def, num) {
             if (Util.empty(localStorage.getItem(name)))
                 return def;
+			if(num)
+            	return parseFloat(localStorage.getItem(name));
             return localStorage.getItem(name);
         }
     },
     loadVars: function () {
-        var up = Util.db.get("up", 2);
-        var down = Util.db.get("down", 5);
-        var duration = Util.db.get("dur", 5);/*
-        Util.id("tempo").setAttribute("placeholder", tt);
-        Util.id("tpm").setAttribute("placeholder", 60 / tt);
-        Util.id("tcount").setAttribute("placeholder", (60 * wt) / tt);
-        Util.id("wtime").setAttribute("placeholder", wt);
-        Stopwatch.data.tempo = tt;
-        Stopwatch.data.tempoUp = 1;
-        Stopwatch.data.tempoDn = 1;
-        Stopwatch.data.duration = wt;*/
+        var up = Util.db.get("up", 0, 1);
+        var down = Util.db.get("down", 0, 1);
+        var duration = Util.db.get("dur", 0, 1);
+		
+		//Set range to loaded values
+		Range.set(Util.id("tempoUpRange"), up);
+		Range.set(Util.id("tempoDnRange"), down);
+		Range.set(Util.id("durationRange"), duration);
+		
+		//Load data to stopwacth and display
+		Util.interactions.setTempoUp(up, 1)
+		Util.interactions.setTempoDn(down, 1)
+		Util.interactions.setDuration(duration);
     },
     setVars: function () {
-        Util.db.store("ttime", Stopwatch.data.tempo);
-        Util.db.store("ttime", Stopwatch.data.duration);
+        Util.db.store("up", Range.get(Util.id("tempoUpRange")));
+        Util.db.store("down", Range.get(Util.id("tempoDnRange")));
+        Util.db.store("dur", Range.get(Util.id("durationRange")));
     },
     prepare: function (screen, data) {
         if (screen == "setup1") {
-            Util.loadVars();
             Stopwatch.data.infinity = data;
             if (data){
                 Util.id("stp1btn").innerHTML = lang[ViewManager.data.lid][13];
             } else {
                 Util.id("stp1btn").innerHTML = lang[ViewManager.data.lid][9];
             }
+			return ViewManager.openView(screen, false, Util.loadVars);
         } else if (screen == "setup2") {
             if (Stopwatch.data.infinity) {
                 Stopwatch.data.paused = false;
                 Stopwatch.data.duration = 1440;
                 return ViewManager.openView('stopwatch', false, Stopwatch.countdown);
-            }
-            /*if (Util.empty(Util.id("tempo").value))
-                Util.id("tempo").value = Stopwatch.data.tempo;*/
-            //Util.id("tcount").setAttribute("placeholder", (60 * Stopwatch.data.duration) / Util.id("tempo").value);
+            }else{
+				return ViewManager.openView(screen, false, function(){
+					Range.restyle(Util.id("durationRange"));
+				});
+			}
+        } else if (screen == "stopwatch") {
+            Stopwatch.data.paused = false; 
+			Util.setVars();
+			return ViewManager.openView('stopwatch', false, Stopwatch.countdown);
         };
-        ViewManager.goto(screen);
+		ViewManager.goto(screen);
     },
     empty: function (variable) {
         return (typeof variable === "undefined") || (variable == null) || (variable.length === 0);
     },
 	interactions: {
-		setTempoUp: function(perc){
-			Stopwatch.data.tempoUp = Util.helpers.percToVal(perc, 1, 15, 2);
+		//Only parameter for setting only Fn's value
+		setTempoUp: function(perc, only){
+			Stopwatch.data.tempoUp = Stopwatch.config.defaultData.tempoUp = Util.helpers.percToVal(perc, Stopwatch.config.rangeUp);
 			Util.helpers.displayTempo();
-			Util.interactions.setDuration(0);
+			if(!only)
+				Util.interactions.setDuration(Util.db.get("dur", 0, 1));
 		},
-		setTempoDn: function(perc){
-			Stopwatch.data.tempoDn = Util.helpers.percToVal(perc, 1, 15, 2);
+		setTempoDn: function(perc, only){
+			Stopwatch.data.tempoDn = Stopwatch.config.defaultData.tempoDn = Util.helpers.percToVal(perc, Stopwatch.config.rangeDn);
 			Util.helpers.displayTempo();
-			Util.interactions.setDuration(0);
+			if(!only)
+				Util.interactions.setDuration(Util.db.get("dur", 0, 1));
 		},
 		setDuration: function(perc){
-			var repeats = Util.helpers.percToVal(perc, 1, 500, 1);
+			var repeats = Util.helpers.percToVal(perc, Stopwatch.config.rangeTimes);
 			var duration = (Stopwatch.data.tempoDn+Stopwatch.data.tempoUp)*repeats;
-			Stopwatch.data.duration = duration;
+			Stopwatch.data.duration = Stopwatch.config.defaultData.duration = duration;
 			Util.helpers.displayDuration(duration, repeats);
 		},
 	},
 	helpers: {
-		percToVal: function(perc, min, max, prec){
-			return min + Math.round((max-min)*(perc/100)*prec)/prec;
+		percToVal: function(perc, min, max, precMul){//precision multipler
+			if(typeof min == "object"){
+				precMul = 1 / min.precision;
+				max = min.to;
+				min = min.from;
+			}
+			return min + Math.round((max-min)*(perc/100)*precMul)/precMul;
 		},
 		displayTempo: function(){
 			Util.id("tempo_val").innerHTML = Stopwatch.data.tempoUp+"s / "+Stopwatch.data.tempoDn+"s";
@@ -356,6 +377,12 @@ var Range = {
 		var tmp_max = node.getBoundingClientRect().width - touchable.getBoundingClientRect().width;
 		touchable.style.left = (perc/100) * tmp_max + "px";
 		node.setAttribute("data-value", perc);
+	},
+	get: function(node){
+		return parseFloat(node.getAttribute("data-value"));
+	},
+	restyle: function(node){
+		this.set(node, this.get(node));
 	}
 };
 
