@@ -35,16 +35,6 @@ var Ssw = {
 			Util.id("totime").style.transform="rotate("+((360/60)*val)+"deg)";
 		};
 	},
-    /*preStart: function () {
-
-          -- DONE by ViewManager
-	    Util.id("settings").style.top = "100%";
-	    Util.id("wr").style.filter = "blur(0px)";
-	    Util.id("text").style.filter = "blur(0px)";
-	    setTimeout(function () { Util.id("settings").style.display = "none"; }, 200);
-	    Ssw.countdown();
-
-	},*/
 	countdown: function () {
 	    if (Ssw.data.paused) {
 	        Util.id("stc").style.display = "block";
