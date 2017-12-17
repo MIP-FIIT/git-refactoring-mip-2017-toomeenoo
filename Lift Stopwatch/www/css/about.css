@@ -22,6 +22,10 @@ a{
 p.center {
     text-align: center;
 }
+p{
+	margin:10px;
+	margin-top:20px;
+}
 code {
     font-family: 'Consolas', monospace;
 }

@@ -15,7 +15,7 @@
                 AdMob.createBanner({
                     adId: admobid.banner,
                     position: AdMob.AD_POSITION.BOTTOM_CENTER,
-                    isTesting: true,
+                    isTesting: !relase,
                     overlap: true,
                     offsetTopBar: false,
                     bgColor: 'black'

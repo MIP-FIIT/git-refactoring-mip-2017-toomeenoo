@@ -151,6 +151,7 @@ var ViewManager = {
     },
 };
 
+
 //Keyboard manager 
 /*
 Vkb = {
