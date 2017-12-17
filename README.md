@@ -1,5 +1,5 @@
 ## Lift Stopwatch
-![logo]("https://ggtip.com/res/img/uploads/lsw.png")
+![logo](https://ggtip.com/res/img/uploads/lsw.png "App icon")
 
 This app will help you to stay in rythm during your exercise. Simply set up parameters how fast and how long you want to lift (does not matter what) and press start.
 
