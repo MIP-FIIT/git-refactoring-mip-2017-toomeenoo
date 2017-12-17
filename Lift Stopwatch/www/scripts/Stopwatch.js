@@ -1,4 +1,4 @@
-var relase = false;
+var relase = true;
 var Stopwatch = {
 	config: {
 		upPosition: 25,
@@ -48,6 +48,12 @@ var Stopwatch = {
 	start: function () {
 	    //VM callback keep screen on
 	    ViewManager.sleep(false);
+		
+		//Add load
+		AdMob.prepareInterstitial({
+				adId:admobid.interstitial,
+				autoShow: false,
+      		});
 				
 	    Util.id("ball").style.display = "block";
 
@@ -122,6 +128,7 @@ var Stopwatch = {
 	        }, delay);
 	    } else {
 	        Util.id("bh").style.top = "-25%";
+			AdMob.showInterstitial();
 	    }
 	},
 	lz: function (num) {//Leading zero
