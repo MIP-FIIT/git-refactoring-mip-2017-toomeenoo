@@ -22,43 +22,42 @@
             </article>
         </section>
     </div>
-    <div class="view" id="setup1">
+    <div class="view" id="setup1" onMouseMove="Range.move(event)">
         <div class="bkbtn txt" onclick="ViewManager.goback();">Späť</div>
         <section>
             <article>
                 <h2 class="txt">1. Tempo:</h2>
-                <label class="txt">Čas tempa (v sek.)</label>
-                <div class="group">
-                    <div class="pmbtn btn" onclick="Stopwatch.moveOne('tempo', false)">-</div>
-                    <input id="tempo" type="number" placeholder="2" onKeyUp="Stopwatch.set(this.id, this.value);" onblur="ViewManager.fs();" />
-                    <div class="pmbtn btn" onclick="Stopwatch.moveOne('tempo', true)">+</div>
+				<p id="tempo_val" class="screenVal">1s / 1s</p>
+                <label class="txt">Hore</label>
+                <div class="groupRange" 
+					onMouseDown="Range.start(this, event, false, Util.interactions.setTempoUp)" 
+					onMouseUp="Range.stop()"
+					data-value="0" id="tempoUpRange">
+                    <div class="buttonRange"></div>
                 </div>
-                <label class="txt">Temp za minútu</label>
-                <div class="group">
-                    <div class="pmbtn btn" onclick="Stopwatch.moveOne('tpm', false)">-</div>
-                    <input id="tpm" type="number" placeholder="30" onKeyUp="Stopwatch.set(this.id, this.value);" onblur="ViewManager.fs();" />
-                    <div class="pmbtn btn" onclick="Stopwatch.moveOne('tpm', true)">+</div>
+                <label class="txt">Dolu</label>
+                <div class="groupRange" 
+					onMouseDown="Range.start(this, event, false, Util.interactions.setTempoDn)" 
+					onMouseUp="Range.stop()"
+					data-value="0" id="tempoDnRange">
+                    <div class="buttonRange"></div>
                 </div>
                 <div onclick="Util.prepare('setup2');" class="btn green next txt" id="stp1btn">Ďalej</div>
             </article>
         </section>
     </div>
-    <div class="view" id="setup2">
+    <div class="view" id="setup2" onMouseMove="Range.move(event)">
         <div class="bkbtn txts" onclick="ViewManager.goback();" data-translate-id="5">Späť</div>
         <section>
             <article>
                 <h2 class="txt">2. Počet alebo čas:</h2>
-                <label class="txt">Počet temp</label>
-                <div class="group">
-                    <div class="pmbtn btn" onclick="Stopwatch.moveOne('tcount', false)">-</div>
-                    <input id="tcount" type="number" placeholder="150" onKeyUp="Stopwatch.set(this.id, this.value);" onblur="ViewManager.fs();" />
-                    <div class="pmbtn btn" onclick="Stopwatch.moveOne('tcount', true)">+</div>
-                </div>
-                <label class="txt">Čas cvičenia (v min.)</label>
-                <div class="group">
-                    <div class="pmbtn btn" onclick="Stopwatch.moveOne('wtime', false)">-</div>
-                    <input id="wtime" type="number" placeholder="5" onKeyUp="Stopwatch.set(this.id, this.value);" onblur="ViewManager.fs();" />
-                    <div class="pmbtn btn" onclick="Stopwatch.moveOne('wtime', true)">+</div>
+				<p id="duration_val" class="screenVal">1min / 60x</p>
+                <label>&nbsp;</label>
+                <div class="groupRange" 
+					onMouseDown="Range.start(this, event, false, Util.interactions.setDuration)" 
+					onMouseUp="Range.stop()"
+					data-value="0" id="durationRange">
+                    <div class="buttonRange"></div>
                 </div>
                 <div class="green next btn txt" onclick="Stopwatch.data.paused = false; ViewManager.openView('stopwatch', false, Stopwatch.countdown);">Štart</div>
             </article>
@@ -78,7 +77,7 @@
                 </div>
             </div>
             <div id="bh">
-                <p id="stc">3</p>
+                <p id="countdown">3</p>
                 <div id="ball" style="display:none;"></div>
             </div>
         </div>
@@ -100,7 +99,6 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/async.delay.js"></script>
     <script type="text/javascript" src="scripts/admob_simple.js"></script>
-    <!--<script type="text/javascript" src="scripts/cordovaTranslator.js"></script>-->
     <script type="text/javascript" src="scripts/lang.js"></script>
     <script type="text/javascript" src="scripts/viewManager.js"></script>
     <script type="text/javascript" src="scripts/Stopwatch.js"></script>

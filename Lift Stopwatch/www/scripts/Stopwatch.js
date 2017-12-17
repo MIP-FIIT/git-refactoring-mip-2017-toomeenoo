@@ -1,83 +1,68 @@
 var relase = false;
-
 var Stopwatch = {
-	data: {
-		ttime: 2,//TODO setup default 2
-		wtime: 5,
-		end: 0,
-		start: 0,
-		loop: 0,
-		stc: 3,
-		infinity: false,
-		animOk: false,
-		paused: false,
+	config: {
+		upPosition: 25,
+		dnPosition: 75,
+		defaultData: {
+			tempoUp: 1,//seconds
+			tempoDn: 1,//seconds
+			duration: 1,//seconds
+			end: 0,//unix ms
+			start: 0,//unix ms
+			countdown: 3,
+			infinity: false,
+			paused: false,
+		}
 	},
-	set: function(id, val){
-		//if(id="wtime") // Add support for MM:SS TODO
-		var tmp = val.replace(",", ".");
-		val = parseFloat(tmp);
-		if(isNaN(val) || val<=0)
-			return;
-		if(id=="tempo"){
-			Stopwatch.data.ttime = val;
-			Util.id("tpm").value=Math.round((60/val)*100)/100;
-		}else if(id=="tpm"){
-			Stopwatch.data.ttime = val = 60 / val;
-			Util.id("tempo").value=Math.round(val*100)/100;
-		}else if(id=="tcount"){
-			Stopwatch.data.wtime = val = (val*Stopwatch.data.ttime)/60;
-			Util.id("wtime").value=Math.round(val*100)/100;
-			Util.id("totime").style.transform="rotate("+((360/60)*val)+"deg)";
-		}else if(id=="wtime"){
-			Stopwatch.data.wtime = val;
-			var num = (Stopwatch.data.wtime*60)/Stopwatch.data.ttime;
-			Util.id("tcount").value=Math.round(num*100)/100;
-			Util.id("totime").style.transform="rotate("+((360/60)*val)+"deg)";
-		};
+	data: {
+		tempoUp: 2,//seconds
+		tempoDn: 2,//seconds
+		duration: 60,//seconds
+		end: 0,//unix ms
+		start: 0,//unix ms
+		countdown: 3,
+		infinity: false,
+		paused: false,
 	},
 	countdown: function () {
 	    if (Stopwatch.data.paused) {
-	        Util.id("stc").style.display = "block";
+	        Util.id("countdown").style.display = "block";
 	        Util.id("ball").style.display = "none";
-	        Stopwatch.data.stc = 3;//DEFAULT
+	        Stopwatch.data.countdown = 3;//DEFAULT
 	        Stopwatch.data.paused = false;
 	        return;
 	    }
-	    if (Stopwatch.data.stc > 0) {
-	        Util.id("stc").innerHTML = Stopwatch.data.stc;
-	        Stopwatch.data.stc--;
+	    if (Stopwatch.data.countdown > 0) {
+	        Util.id("countdown").innerHTML = Stopwatch.data.countdown;
+	        Stopwatch.data.countdown--;
 	        setTimeout(Stopwatch.countdown, 1000);
 	    } else {
-	        Util.id("stc").style.display = "none";
-	        Util.id("ball").style.display = "block";
-	        Stopwatch.start();
+	        Util.id("countdown").style.display = "none";
+			Util.id("bh").style.top = "-25%";
+	        setTimeout(Stopwatch.start, 100);
 	    }
 	},
 	start: function () {
 	    //VM callback keep screen on
 	    ViewManager.sleep(false);
+		
+	    Util.id("ball").style.display = "block";
 
-		var time = Stopwatch.data.wtime * 60000;
-		var minRot = Stopwatch.data.wtime * 6;
-		var secRot = Stopwatch.data.wtime * 360;
-		Stopwatch.data.loop = Math.round(Stopwatch.data.ttime*1000);
+		var time = Stopwatch.data.duration * 1000;
+		var minRot = Stopwatch.data.duration * 0.1;
+		var secRot = Stopwatch.data.duration * 6;
+		
 		Util.id("min").style.transitionDuration=time+"ms";
 		Util.id("sec").style.transitionDuration=time+"ms";
 		Util.id("min").style.transform="rotate("+minRot+"deg)";
 		Util.id("sec").style.transform = "rotate(" + secRot + "deg)";
-		if (Stopwatch.data.animOk) {
-		    Util.id("bh").style.animationDuration = Stopwatch.data.loop + "ms";
-		    var now = new Date();
-		    Stopwatch.data.start = now.getTime();
-		    Stopwatch.data.end = now.getTime() + time
-		} else {
-		    Util.id("bh").style.top = "-75%";
-		    Util.id("bh").style.transition = "top ease-in-out " + (Stopwatch.data.loop / 2) + "ms";
-		    var now = new Date();
-		    Stopwatch.data.start = now.getTime();
-		    Stopwatch.data.end = now.getTime() + time
-		    Stopwatch.jsLoop((Stopwatch.data.loop / 2), 25);
-		}
+
+		Util.id("bh").style.transition = "top ease-in-out 0ms";
+		var now = new Date();
+		Stopwatch.data.start = now.getTime();
+		Stopwatch.data.end = now.getTime() + time
+		Stopwatch.jsLoop(true);
+		
 		Stopwatch.showTime();
 	},
 	showTime: function () {
@@ -85,7 +70,7 @@ var Stopwatch = {
 	        return;
 		var start = Stopwatch.data.start;
 		var end = Stopwatch.data.end;
-		var loop =  Stopwatch.data.loop;
+		var loop = (Stopwatch.data.tempoDn+Stopwatch.data.tempoUp)*1000;
 		var now = new Date().getTime();
 		if(now>end){
 			var data = [false];
@@ -109,22 +94,31 @@ var Stopwatch = {
 		}else{
 			Util.id("bh").style.animationDuration = "";
 			Util.id("time").innerHTML = "0:00.00";
-			Util.id("total").innerHTML = Math.round((Stopwatch.data.end - Stopwatch.data.start) / Stopwatch.data.loop) + " (100%)";
+			Util.id("total").innerHTML = Math.round((Stopwatch.data.end - Stopwatch.data.start) / loop) + " (100%)";
 
 		    //VM callback keep screen on
 			ViewManager.sleep(true);
 		}
 	},
-	jsLoop: function (delay, dir) {
+	jsLoop: function (up) {
+		var dir, delay;
+		if(up){
+			dir = Stopwatch.config.upPosition;
+			delay = Stopwatch.data.tempoDn;
+		}else{
+			dir = Stopwatch.config.dnPosition;
+			delay = Stopwatch.data.tempoUp;
+		}
+		delay *= 1000;
 	    Util.id("bh").style.top = "-" + dir + "%";
 	    var now = new Date().getTime();
-	    //console.log(delay + " " + dir + " " + now + " " + Stopwatch.data.end)
+	   	Util.id("bh").style.transition = "top ease-in-out "+delay+"ms";
 	    if (now < Stopwatch.data.end) {
 	        jsTim = setTimeout(function () {
-	            Stopwatch.jsLoop(delay, ((dir == 75) ? 25 : 75));
+	            Stopwatch.jsLoop(!up);
 	        }, delay);
 	    } else {
-	        Util.id("bh").style.top = "-50%";
+	        Util.id("bh").style.top = "-25%";
 	    }
 	},
 	lz: function (num) {//Leading zero
@@ -134,32 +128,14 @@ var Stopwatch = {
 	        return "0" + num;
 	    return num;
 	},
-	moveOne: function (eid, up) {
-	    var val = Util.id(eid).value;
-	    var tmp = val.replace(",", ".");
-	    val = parseFloat(tmp);
-	    if (isNaN(val) || (undefined === val) || ("" == val))
-	        val = 0;
-	    if (val != Math.round(val))
-	        val = (up) ? Math.ceil(val) : Math.floor(val);
-        else
-	        (up) ? val++ : val--;
-	    if (val < 0)
-	        val = 0;
-	    Util.id(eid).value = val;
-	    Stopwatch.set(eid, Util.id(eid).value);
-	},
 	reset: function(){
-	    Stopwatch.data = {
-	        ttime: 2, wtime: 5, end: 0, start: 0, loop: 0,
-	        stc: 3, infinity: false, animOk: false, paused: true,
-	    };
+	    Stopwatch.data = Stopwatch.config.defaultData;
 	    try { clearTimeout(jsTim) } catch (e) { };
 	    Util.id("min").style.transitionDuration = "0ms";
 	    Util.id("sec").style.transitionDuration = "0ms";
 	    Util.id("min").style.transform = "rotate(0deg)";
 	    Util.id("sec").style.transform = "rotate(0deg)";
-	    Util.id("stc").style.display = "block";
+	    Util.id("countdown").style.display = "block";
 	    Util.id("ball").style.display = "none";
 	    Util.id("time").innerHTML = "0:0.0";
 	    Util.id("bh").style.transition = "top ease-in-out 0ms";
@@ -176,54 +152,46 @@ var Stopwatch = {
 	            ViewManager.sleep(true);
 
                 //Change text
-	            Util.id("pauseBtn").innerHTML = lang[ViewManager.data.lid][13];
+	            Util.id("pauseBtn").innerHTML = lang[ViewManager.data.lid][11];
 
-	            var pt = new Date().getTime();
-	            var rt = Stopwatch.data.end - pt;
-	            var time = Stopwatch.data.wtime * 60000;
-	            var minRot = Stopwatch.data.wtime * 6 * ((pt - Stopwatch.data.start) / (Stopwatch.data.end - Stopwatch.data.start));
-	            var secRot = Stopwatch.data.wtime * 360 * ((pt - Stopwatch.data.start) / (Stopwatch.data.end - Stopwatch.data.start));
+	            var pauseTime = new Date().getTime();
+	            var remainTime = Stopwatch.data.end - pauseTime;
+	            var time = Stopwatch.data.duration * 1000;
+	            var minRot = Stopwatch.data.duration * 0.1 * ((pauseTime - Stopwatch.data.start) / (Stopwatch.data.end - Stopwatch.data.start));
+	            var secRot = Stopwatch.data.duration * 6 * ((pauseTime - Stopwatch.data.start) / (Stopwatch.data.end - Stopwatch.data.start));
 
 	            Util.id("min").style.transitionDuration = "0ms";
 	            Util.id("sec").style.transitionDuration = "0ms";
 	            Util.id("min").style.transform = "rotate(" + minRot + "deg)";
 	            Util.id("sec").style.transform = "rotate(" + secRot + "deg)";
 
-                if(Stopwatch.data.animOk)
-                    Util.id("bh").style.animationDuration = "";
-
 	            Stopwatch.data.start = [minRot, secRot];//Store rotation
-	            Stopwatch.data.end = rt;//Store remaining time
+	            Stopwatch.data.end = remainTime;//Store remaining time
 	        } else {
 	            //VM callback keep screen on
 	            ViewManager.sleep(false);
 
                 //change text
-	            Util.id("pauseBtn").innerHTML = lang[ViewManager.data.lid][16];
+	            Util.id("pauseBtn").innerHTML = lang[ViewManager.data.lid][14];
 
 	            Stopwatch.data.paused = false;
-	            var minRot = Stopwatch.data.wtime * 6;
-	            var secRot = Stopwatch.data.wtime * 360;
+	            var minRot = Stopwatch.data.duration * 0.1;
+	            var secRot = Stopwatch.data.duration * 6;
 	            Util.id("min").style.transitionDuration = Stopwatch.data.end+"ms";
 	            Util.id("sec").style.transitionDuration = Stopwatch.data.end+"ms";
 	            Util.id("min").style.transform = "rotate(" + (minRot) + "deg)";
 	            Util.id("sec").style.transform = "rotate(" + (secRot) + "deg)";
 
-	            if (Stopwatch.data.animOk)
-	                Util.id("bh").style.animationDuration = Math.round(Stopwatch.data.ttime * 1000) + "ms";
-
-	            //turn back time! :D 
+	            //turn back time
 	            Stopwatch.data.end += new Date().getTime();
-	            Stopwatch.data.start = Stopwatch.data.end - Math.round(Stopwatch.data.wtime * 60000);
+	            Stopwatch.data.start = Stopwatch.data.end - Math.round(Stopwatch.data.duration * 1000);
 	            Stopwatch.showTime();
-	            if (!Stopwatch.data.animOk)
-	                Stopwatch.jsLoop((Stopwatch.data.loop / 2), 25);
+				Stopwatch.jsLoop(true);
 	        };
 	    };
 	},
 };
 
-//ADDED CODE
 Util = {
     id: function(key){
         return document.getElementById(key);
@@ -239,18 +207,21 @@ Util = {
         }
     },
     loadVars: function () {
-        var tt = Util.db.get("ttime", 2);
-        var wt = Util.db.get("wtime", 5);
+        var up = Util.db.get("up", 2);
+        var down = Util.db.get("down", 5);
+        var duration = Util.db.get("dur", 5);/*
         Util.id("tempo").setAttribute("placeholder", tt);
         Util.id("tpm").setAttribute("placeholder", 60 / tt);
         Util.id("tcount").setAttribute("placeholder", (60 * wt) / tt);
         Util.id("wtime").setAttribute("placeholder", wt);
-        Stopwatch.data.ttime = tt;
-        Stopwatch.data.wtime = wt;
+        Stopwatch.data.tempo = tt;
+        Stopwatch.data.tempoUp = 1;
+        Stopwatch.data.tempoDn = 1;
+        Stopwatch.data.duration = wt;*/
     },
     setVars: function () {
-        Util.db.store("ttime", Stopwatch.data.ttime);
-        Util.db.store("ttime", Stopwatch.data.wtime);
+        Util.db.store("ttime", Stopwatch.data.tempo);
+        Util.db.store("ttime", Stopwatch.data.duration);
     },
     prepare: function (screen, data) {
         if (screen == "setup1") {
@@ -264,20 +235,129 @@ Util = {
         } else if (screen == "setup2") {
             if (Stopwatch.data.infinity) {
                 Stopwatch.data.paused = false;
-                Stopwatch.data.wtime = 1440;
+                Stopwatch.data.duration = 1440;
                 return ViewManager.openView('stopwatch', false, Stopwatch.countdown);
             }
-            if (Util.empty(Util.id("tempo").value))
-                Util.id("tempo").value = Stopwatch.data.ttime;
-            Util.id("tcount").setAttribute("placeholder", (60 * Stopwatch.data.wtime) / Util.id("tempo").value);
+            /*if (Util.empty(Util.id("tempo").value))
+                Util.id("tempo").value = Stopwatch.data.tempo;*/
+            //Util.id("tcount").setAttribute("placeholder", (60 * Stopwatch.data.duration) / Util.id("tempo").value);
         };
         ViewManager.goto(screen);
     },
     empty: function (variable) {
         return (typeof variable === "undefined") || (variable == null) || (variable.length === 0);
-    }
+    },
+	interactions: {
+		setTempoUp: function(perc){
+			Stopwatch.data.tempoUp = Util.helpers.percToVal(perc, 1, 15, 2);
+			Util.helpers.displayTempo();
+			Util.interactions.setDuration(0);
+		},
+		setTempoDn: function(perc){
+			Stopwatch.data.tempoDn = Util.helpers.percToVal(perc, 1, 15, 2);
+			Util.helpers.displayTempo();
+			Util.interactions.setDuration(0);
+		},
+		setDuration: function(perc){
+			var repeats = Util.helpers.percToVal(perc, 1, 500, 1);
+			var duration = (Stopwatch.data.tempoDn+Stopwatch.data.tempoUp)*repeats;
+			Stopwatch.data.duration = duration;
+			Util.helpers.displayDuration(duration, repeats);
+		},
+	},
+	helpers: {
+		percToVal: function(perc, min, max, prec){
+			return min + Math.round((max-min)*(perc/100)*prec)/prec;
+		},
+		displayTempo: function(){
+			Util.id("tempo_val").innerHTML = Stopwatch.data.tempoUp+"s / "+Stopwatch.data.tempoDn+"s";
+		},
+		displayDuration: function(duration, repeats){
+			Util.id("duration_val").innerHTML = Util.helpers.sToMin(duration)+" min / "+repeats+" x";
+		},
+		sToMin: function(s){
+			return Math.floor(s/60)+":"+Util.helpers.leadingZero(Math.round(s%60));
+		},
+		leadingZero: function(num){
+			return Stopwatch.lz(num);
+		}
+	},
 }
 
+var Range = {
+	configLimit: 10,
+	
+	node: false,
+	active: false,
+	position: 0,
+	value: 0,
+	touch: -1,
+	last: 0,
+	max: 0,
+	touchLimits: {},
+	updateF: false,
+	finishF: false,
+	
+	start: function(node, event, finishF, updateF){
+		this.updateF = updateF || false;
+		this.finishF = finishF || false;
+		this.node = node;
+		this.touchLimits = node.getBoundingClientRect()
+		var touchable = node.getElementsByTagName("div")[0];
+		var touchableSizes = touchable.getBoundingClientRect();
+		if(event.target == touchable){
+			this.max = this.touchLimits.width - touchableSizes.width - 4;//border fix
+			this.touch = event.x;
+			this.position = touchableSizes.left-this.touchLimits.left;
+			this.active = touchable;
+		}
+	},
+	limit: function(value){
+		if(value<0)
+			value = 0;
+		if(value>this.max)
+			value = this.max;
+		return value;
+	},
+	touchLimit: function(event){
+		if(
+			this.touchLimits.top-this.configLimit < event.y &&
+			this.touchLimits.bottom+this.configLimit > event.y &&
+			this.touchLimits.left-this.configLimit < event.x &&
+			this.touchLimits.right+this.configLimit > event.x 
+		){
+			return true;
+		}else{
+			this.stop();
+			return false;
+		}
+	},
+	move: function(event){
+		if(this.active && this.touchLimit(event)){
+			this.last = this.limit(this.position+(event.x - this.touch));
+			this.value = (this.last / this.max)*100;
+			this.active.style.left = this.last+"px";
+			if(this.updateF){
+				this.updateF(this.value);
+			}
+		}
+	},
+	stop: function(){
+		this.position = this.last;
+		this.touch = -1;
+		this.active = false;
+		this.node.setAttribute("data-value", this.value);
+		if(this.finishF){
+			this.finishF(this.value);
+		}
+	},
+	set: function(node, perc){
+		var touchable = node.getElementsByTagName("div")[0];
+		var tmp_max = node.getBoundingClientRect().width - touchable.getBoundingClientRect().width;
+		touchable.style.left = (perc/100) * tmp_max + "px";
+		node.setAttribute("data-value", perc);
+	}
+};
 
 //REMOVE
 if (!relase)

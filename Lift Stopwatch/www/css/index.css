@@ -1,3 +1,9 @@
+body, html{
+	width:100vw;
+	height:100vh;
+	background-color:#111111;
+	overflow:hidden;
+}
 /* VM code*/
 .view{
     width:100%;
@@ -17,6 +23,9 @@
     display:block;
     opacity:1;
 }
+.preview, .view{
+	background-color:#252525;
+}
 /* END VM */
 
 * {
@@ -27,11 +36,11 @@ body {
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -webkit-user-select: none;
-    background-color:#32383d;
     font-family: 'RobotoRegular', 'Droid Sans', 'Segoe UI', Segoe, 'San Francisco', 'Helvetica Neue', Helvetica, Arial, Geneva, sans-serif;
     font-size:12px;
-    background-image:url("../images/background_optimized_dark.jpg");
+    /*background-image:url("../images/background_optimized_dark.jpg");
     background-size:cover;
+	background-color:#32383d;*/
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -45,12 +54,6 @@ input[type="number"] {
 	padding:0;
 	margin:0;
     font-family:'Roboto', sans-serif;
-}
-body, html{
-	width:100vw;
-	height:100vh;
-	background-color:hsla(0,0%,13%,1.00);
-	overflow:hidden;
 }
 h1, h2, h3, h4, h5, h6{
     font-weight:normal;
@@ -344,8 +347,8 @@ div.btn.next{
 }
 .textWindow{
     color: rgba(10,10,10,0.5);
-    background-color: #e0e0ff;
-    border-radius: 5px;
+    background-color: #e0e0e0;
+    border-radius: 2px;
     padding: 8px;
     margin: 50px 5% 0 5%;
     width: 90%;
@@ -358,6 +361,37 @@ div.btn.next{
 }
 p.center{
     text-align:center;
+}
+.groupRange{
+	height:25px;
+	border: 1px solid #ffffff;
+	border-radius:2px;
+	margin:10px 0 15px 0;
+}
+.buttonRange{
+	height:17px;
+	padding:4px 2px 2px 1px;
+	width:36px;
+	margin:1px;
+	background-color:#CDCDCD;
+	border-radius:2px;
+	position:relative;
+	left:0;
+}
+.buttonRange:before{
+	display:block;
+	content:"";
+	height:17px;
+	width:100%;
+	background-color:#E5E5E5;
+	border-radius:4px 4px 2px 2px;
+	position:relative;
+	left:0;
+}
+.screenVal{
+	text-align:center;
+	font-size:x-large;
+	color:#ffffff;
 }
 
 
