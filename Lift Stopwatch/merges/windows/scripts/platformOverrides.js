@@ -7,5 +7,5 @@
     } else {
         document.head.appendChild(scriptElem);
     }
-    Ssw.data.animOk = false;
+    Stopwatch.data.animOk = false;
 }());
