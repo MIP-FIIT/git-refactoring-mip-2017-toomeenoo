@@ -1,4 +1,4 @@
-var relase = true;
+var relase = false;
 var Stopwatch = {
 	config: {
 		upPosition: 25,
@@ -50,10 +50,12 @@ var Stopwatch = {
 	    ViewManager.sleep(false);
 		
 		//Add load
-		AdMob.prepareInterstitial({
-				adId:admobid.interstitial,
-				autoShow: false,
-      		});
+		try{
+			AdMob.prepareInterstitial({
+					adId:admobid.interstitial,
+					autoShow: false,
+				});
+		}catch(e){};
 				
 	    Util.id("ball").style.display = "block";
 
@@ -128,7 +130,9 @@ var Stopwatch = {
 	        }, delay);
 	    } else {
 	        Util.id("bh").style.top = "-25%";
-			AdMob.showInterstitial();
+			try{
+				AdMob.showInterstitial()
+			}catch(e){};
 	    }
 	},
 	lz: function (num) {//Leading zero
@@ -196,7 +200,7 @@ var Stopwatch = {
 	            Stopwatch.data.end += new Date().getTime();
 	            Stopwatch.data.start = Stopwatch.data.end - Math.round(Stopwatch.data.duration * 1000);
 	            Stopwatch.showTime();
-				Stopwatch.jsLoop(true);
+				Stopwatch.jsLoop(false);
 	        };
 	    };
 	},
