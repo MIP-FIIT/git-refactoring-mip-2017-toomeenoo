@@ -378,6 +378,7 @@ p.center{
 	position:relative;
 	left:0;
 }
+/*
 .buttonRange:before{
 	display:block;
 	content:"";
@@ -388,6 +389,7 @@ p.center{
 	position:relative;
 	left:0;
 }
+*/
 .screenVal{
 	text-align:center;
 	font-size:x-large;

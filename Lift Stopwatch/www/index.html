@@ -18,11 +18,11 @@
                 <div class="btn txt" onclick="Util.prepare('setup1', true);">Nekonečný režim</div>
                 <div class="btn txt notReady">Nastavenie</div>
                 <div class="btn txt" onclick="ViewManager.goto('about');">! O aplikácii</div>
-                <div class="red btn txt" onclick="navigator.app.exitApp();">Ukončiť</div>
+                <div class="red btn txt" onclick="navigator.app.exitApp();" id="exitBtn">Ukončiť</div>
             </article>
         </section>
     </div>
-    <div class="view" id="setup1" onMouseMove="Range.move(event)">
+    <div class="view" id="setup1" onMouseMove="Range.move(event)" ontouchmove="Range.move(event)">
         <div class="bkbtn txt" onclick="ViewManager.goback();">Späť</div>
         <section>
             <article>
@@ -31,14 +31,16 @@
                 <label class="txt">Hore</label>
                 <div class="groupRange" 
 					onMouseDown="Range.start(this, event, false, Util.interactions.setTempoUp)" 
-					onMouseUp="Range.stop()"
+					ontouchstart="Range.start(this, event, false, Util.interactions.setTempoUp)" 
+					onMouseUp="Range.stop()" ontouchend="Range.stop()"
 					data-value="0" id="tempoUpRange">
                     <div class="buttonRange"></div>
                 </div>
                 <label class="txt">Dolu</label>
                 <div class="groupRange" 
 					onMouseDown="Range.start(this, event, false, Util.interactions.setTempoDn)" 
-					onMouseUp="Range.stop()"
+					ontouchstart="Range.start(this, event, false, Util.interactions.setTempoDn)" 
+					onMouseUp="Range.stop()" ontouchend="Range.stop()"
 					data-value="0" id="tempoDnRange">
                     <div class="buttonRange"></div>
                 </div>
@@ -46,7 +48,7 @@
             </article>
         </section>
     </div>
-    <div class="view" id="setup2" onMouseMove="Range.move(event)">
+    <div class="view" id="setup2" onMouseMove="Range.move(event)" ontouchmove="Range.move(event)">
         <div class="bkbtn txts" onclick="ViewManager.goback();" data-translate-id="5">Späť</div>
         <section>
             <article>
@@ -55,7 +57,8 @@
                 <label>&nbsp;</label>
                 <div class="groupRange" 
 					onMouseDown="Range.start(this, event, false, Util.interactions.setDuration)" 
-					onMouseUp="Range.stop()"
+					ontouchstart="Range.start(this, event, false, Util.interactions.setDuration)" 
+					onMouseUp="Range.stop()" ontouchend="Range.stop()"
 					data-value="0" id="durationRange">
                     <div class="buttonRange"></div>
                 </div>
