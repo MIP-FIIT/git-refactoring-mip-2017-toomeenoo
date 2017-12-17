@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="sk.toomeenoo.liftsw" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US" android-versionCode="1">
+<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="sk.toomeenoo.liftsw" version="1.1.2" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US" android-versionCode="3">
   <name>Lift Stopwatch</name>
   <description>This app will help you to stay in rythm during your exercise. Simply set up parameters how fast and how long you want to lift (does not matter what) and press start.</description>
   <author href="http://cordova.io" email="dev@cordova.apache.org">TooMeeNoo</author>
@@ -118,6 +118,6 @@
   <plugin name="cordova-plugin-extension" version="1.5.1" />
   <plugin name="cordova-plugin-insomnia" version="4.3.0" src="https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin" />
   <plugin name="cordova-plugin-fullscreen" version="1.1.0" />
-  <preference name="android-maxSdkVersion" value="25" />
+  <preference name="android-maxSdkVersion" value="27" />
   <plugin name="cordova-plugin-statusbar" version="2.3.0" />
 </widget>
