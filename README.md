@@ -8,22 +8,22 @@ Cordova app development enviroment, recomended is MS Visual Studio. The app is w
 
 ## File description
 
- |-Lift Stopwatch.sln	(visual studio solution)
- |-Lift Stopwatch	(core directory)
- ||-merges	(individual scriprs for different platforms)
- ||-plugins	(folder for cordova plugins used by app, described under plugins)
- ||-res	(visual resources for aplicaion, icons, screens, etc)
- ||-www	(default webview folder)
- |||-css	(styles folder)
- |||-docs	(html documents folder)
- |||-scripts	(main code folder)
- |||-images	(used graphics folder)
- |||-index.html (main file)
- ||-Lift Stopwatch.jsproj	(visual studio project)
- ||-config.xml	(cordova configuration file)
- ||-bower.json	(helper file)
- ||-package.json	(idenification file)
- ||-taco.json	(helper file)
+ |-Lift Stopwatch.sln	(visual studio solution)<br />
+ |-Lift Stopwatch	(core directory)<br />
+ ||-merges	(individual scriprs for different platforms)<br />
+ ||-plugins	(folder for cordova plugins used by app, described under plugins)<br />
+ ||-res	(visual resources for aplicaion, icons, screens, etc)<br />
+ ||-www	(default webview folder)<br />
+ |||-css	(styles folder)<br />
+ |||-docs	(html documents folder)<br />
+ |||-scripts	(main code folder)<br />
+ |||-images	(used graphics folder)<br />
+ |||-index.html (main file)<br />
+ ||-Lift Stopwatch.jsproj	(visual studio project)<br />
+ ||-config.xml	(cordova configuration file)<br />
+ ||-bower.json	(helper file)<br />
+ ||-package.json	(idenification file)<br />
+ ||-taco.json	(helper file)<br />
 
 
 ## License
