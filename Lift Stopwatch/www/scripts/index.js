@@ -37,7 +37,7 @@
             console.log(e);
         }
         //Tr.load();
-        Vm.start(true);
+        ViewManager.start(true);
         
         //document.getElementById("ssss").innerHTML = userLang;
     };

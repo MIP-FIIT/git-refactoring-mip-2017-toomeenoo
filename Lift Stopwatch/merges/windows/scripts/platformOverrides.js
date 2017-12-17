@@ -8,4 +8,5 @@
         document.head.appendChild(scriptElem);
     }
     Stopwatch.data.animOk = false;
+    document.getElementById("exitBtn").style.display="none";
 }());

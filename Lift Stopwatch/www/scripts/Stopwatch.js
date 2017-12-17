@@ -1,4 +1,4 @@
-var relase = false;
+var relase = true;
 var Stopwatch = {
 	config: {
 		upPosition: 25,
@@ -48,6 +48,12 @@ var Stopwatch = {
 	start: function () {
 	    //VM callback keep screen on
 	    ViewManager.sleep(false);
+		
+		//Add load
+		AdMob.prepareInterstitial({
+				adId:admobid.interstitial,
+				autoShow: false,
+      		});
 				
 	    Util.id("ball").style.display = "block";
 
@@ -122,6 +128,7 @@ var Stopwatch = {
 	        }, delay);
 	    } else {
 	        Util.id("bh").style.top = "-25%";
+			AdMob.showInterstitial();
 	    }
 	},
 	lz: function (num) {//Leading zero
@@ -320,15 +327,16 @@ var Range = {
 	finishF: false,
 	
 	start: function(node, event, finishF, updateF){
+		var e = this.eventParse(event);
 		this.updateF = updateF || false;
 		this.finishF = finishF || false;
 		this.node = node;
-		this.touchLimits = node.getBoundingClientRect()
+		this.touchLimits = node.getBoundingClientRect();
 		var touchable = node.getElementsByTagName("div")[0];
 		var touchableSizes = touchable.getBoundingClientRect();
 		if(event.target == touchable){
 			this.max = this.touchLimits.width - touchableSizes.width - 4;//border fix
-			this.touch = event.x;
+			this.touch = e.x;
 			this.position = touchableSizes.left-this.touchLimits.left;
 			this.active = touchable;
 		}
@@ -342,20 +350,21 @@ var Range = {
 	},
 	touchLimit: function(event){
 		if(
-			this.touchLimits.top-this.configLimit < event.y &&
-			this.touchLimits.bottom+this.configLimit > event.y &&
-			this.touchLimits.left-this.configLimit < event.x &&
-			this.touchLimits.right+this.configLimit > event.x 
+			this.touchLimits.top-this.configLimit > event.y ||
+			this.touchLimits.bottom+this.configLimit < event.y ||
+			this.touchLimits.left-this.configLimit > event.x ||
+			this.touchLimits.right+this.configLimit < event.x 
 		){
-			return true;
-		}else{
+			console.log("Off limit", event.x, event.y, this.touchLimits.top-this.configLimit, this.touchLimits.bottom+this.configLimit, this.touchLimits.left-this.configLimit, this.touchLimits.right+this.configLimit);
 			this.stop();
 			return false;
 		}
+		return true
 	},
 	move: function(event){
-		if(this.active && this.touchLimit(event)){
-			this.last = this.limit(this.position+(event.x - this.touch));
+		var e = this.eventParse(event);
+		if(this.active && this.touchLimit(e)){
+			this.last = this.limit(this.position+(e.x - this.touch));
 			this.value = (this.last / this.max)*100;
 			this.active.style.left = this.last+"px";
 			if(this.updateF){
@@ -364,6 +373,7 @@ var Range = {
 		}
 	},
 	stop: function(){
+		console.log("stop", this.active);
 		this.position = this.last;
 		this.touch = -1;
 		this.active = false;
@@ -371,6 +381,14 @@ var Range = {
 		if(this.finishF){
 			this.finishF(this.value);
 		}
+	},
+	eventParse: function(event){
+		if(event.type.indexOf("touch")>=0){
+			return {x: event.targetTouches[0].clientX, y: event.targetTouches[0].clientY};
+		}else{
+			return {x: event.clientX, y: event.clientY};
+		}
+		
 	},
 	set: function(node, perc){
 		var touchable = node.getElementsByTagName("div")[0];
